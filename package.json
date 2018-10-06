@@ -1,0 +1,25 @@
+{
+  "name": "walinns.manivasagam",
+  "version": "1.0.0",
+  "description": "Mobile hybrid SDK",
+  "cordova": {
+    "id": "com.walinns.walinnshybrid",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Walinns-Manivasagam/HybridSdkNew.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Walinns innovaion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Walinns-Manivasagam/HybridSdkNew/issues"
+  },
+  "homepage": "https://github.com/Walinns-Manivasagam/HybridSdkNew#readme"
+}
