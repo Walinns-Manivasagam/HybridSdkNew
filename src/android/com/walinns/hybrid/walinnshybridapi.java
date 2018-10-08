@@ -13,19 +13,17 @@ public class walinnshybridapi extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-      if (action.equals("coolMethod")) {
-           String message = args.getString(0);
-           this.coolMethod(message, callbackContext);
-           return true;
-       } else if (action.equals("trackEvent")) {
-           String message = args.getString(0);
-           this.trackEvent(message, callbackContext);
-           return true;
-       } else if (action.equals("trackScreen")) {
-           String message = args.getString(0);
-           this.trackScreen(message, callbackContext);
-           return true;
-       }
+        if (action.equals("coolMethod")) {
+            String message = args.getString(0) + "-" + args.getString(1);
+            this.coolMethod(message, callbackContext);
+            return true;
+        } else if (action.equals("trackEvent")) {
+            this.trackEvent(args.getString(0), args.getString(1), callbackContext);
+            return true;
+        } else if (action.equals("trackScreen")) {
+            this.trackScreen(args.getString(0), callbackContext);
+            return true;
+        }
         return false;
     }
 
@@ -33,25 +31,26 @@ public class walinnshybridapi extends CordovaPlugin {
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
         } else {
-            callbackContext.error("Expected one non-empty string argument.");
+            callbackContext.error("Error");
         }
     }
 
-    private void trackEvent(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-            WalinnsAPI.getInstance().track("button", "Email button clicked");
+
+    private void trackEvent(String type, String eventName, CallbackContext callbackContext) {
+        if (type != null && type.length() > 0) {
+            callbackContext.success(type + " - " + eventName);
+            WalinnsAPI.getInstance().track(type, eventName);
         } else {
-            callbackContext.error("Expected one non-empty string argument.");
+            callbackContext.error("Error");
         }
     }
 
-    private void trackScreen(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-            WalinnsAPI.getInstance().track(message);
+    private void trackScreen(String screenName, CallbackContext callbackContext) {
+        if (screenName != null && screenName.length() > 0) {
+            WalinnsAPI.getInstance().track(screenName);
+            callbackContext.success(screenName);
         } else {
-            callbackContext.error("Expected one non-empty string argument.");
+            callbackContext.error("Error");
         }
     }
 }
